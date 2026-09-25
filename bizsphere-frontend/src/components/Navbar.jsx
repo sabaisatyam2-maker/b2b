@@ -21,6 +21,7 @@ export default function Navbar() {
         <nav className="nav-links">
           <Link to="/services" className={is("/services") ? "active" : ""}>Services</Link>
           <Link to="/browse" className={is("/browse") ? "active" : ""}>Vendors</Link>
+          <Link to="/contact" className={is("/contact") ? "active" : ""}>Contact</Link>
           {!user && <Link to="/login" className={is("/login") ? "active" : ""}>Login</Link>}
           {!user && <Link to="/register" className="btn btn-primary btn-sm">Get Started</Link>}
           {user && user.role === "vendor" && (
