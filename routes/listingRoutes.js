@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getListings, getListingById } = require('../controllers/listingController');
+const { getListings, getListingById, getPublicCategories } = require('../controllers/listingController');
 
 // ==========================================
 // Public Listing Routes (Koi middleware nahi chahiye kyunki ye sabke liye open hain)
@@ -9,6 +9,8 @@ const { getListings, getListingById } = require('../controllers/listingControlle
 
 // GET: Sabhi approved listings dekhne/search karne ke liye
 router.get('/', getListings);
+
+router.get('/categories', getPublicCategories);
 
 // GET: Kisi ek approved listing ki poori details dekhne ke liye
 router.get('/:id', getListingById);

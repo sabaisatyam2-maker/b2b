@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+﻿const mongoose = require('mongoose');
 
 const vendorRequestSchema = new mongoose.Schema(
     {
@@ -12,8 +12,9 @@ const vendorRequestSchema = new mongoose.Schema(
             required: [true, 'Please add a business name'],
         },
         category: {
-            type: String, // Free text category
+            type: String,
             required: [true, 'Please add a category'],
+            trim: true,
         },
         description: {
             type: String,
@@ -30,6 +31,10 @@ const vendorRequestSchema = new mongoose.Schema(
         contactPhone: {
             type: String,
             required: [true, 'Please add a contact phone'],
+        },
+        price: {
+            type: Number,
+            required: [true, 'Please add service charges in Rupees'],
         },
         images: [
             {
@@ -58,3 +63,4 @@ vendorRequestSchema.index({ businessName: 'text', category: 'text', location: 't
 const VendorRequest = mongoose.model('VendorRequest', vendorRequestSchema);
 
 module.exports = VendorRequest;
+

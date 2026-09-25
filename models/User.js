@@ -30,6 +30,12 @@ const userSchema = new mongoose.Schema(
             enum: ['user', 'vendor', 'admin'],
             default: 'user',
         },
+        isEmailVerified: {
+            type: Boolean,
+            default: false,
+        },
+        emailVerificationToken: String,
+        emailVerificationExpires: Date,
         resetPasswordToken: String,
         resetPasswordExpires: Date,
     },
@@ -73,7 +79,23 @@ userSchema.methods.generateResetPasswordToken = function () {
     return rawToken;
 };
 
-// 5. Model ko export kar rahe hain taaki baaki controllers isko use kar sakein
+// ==========================================
+// 5. Generate & Hash Email Verification Token
+// ==========================================
+userSchema.methods.generateEmailVerificationToken = function () {
+    const rawToken = crypto.randomBytes(32).toString('hex');
+
+    this.emailVerificationToken = crypto
+        .createHash('sha256')
+        .update(rawToken)
+        .digest('hex');
+
+    this.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 ghante tak valid rahega
+
+    return rawToken;
+};
+
+// 6. Model ko export kar rahe hain taaki baaki controllers isko use kar sakein
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

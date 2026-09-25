@@ -10,6 +10,7 @@ const vendorRoutes = require('./routes/vendorRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const listingRoutes = require('./routes/listingRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Dotenv config load kar rahe hain taaki .env file se variables padh sakein
 
@@ -31,6 +32,7 @@ app.use('/api/vendor', vendorRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/listings', listingRoutes);
 app.use('/api/enquiries', enquiryRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Database connect kar rahe hain
 connectDB();

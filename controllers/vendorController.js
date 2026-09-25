@@ -6,7 +6,7 @@ const Enquiry = require('../models/Enquiry');
 // ==========================================
 const createListing = async (req, res) => {
     try {
-        const { businessName, category, description, location, contactEmail, contactPhone } = req.body;
+        const { businessName, category, description, location, contactEmail, contactPhone, price } = req.body;
 
         // Multer se aayi hui images (array) ko process kar rahe hain
         const images = [];
@@ -27,6 +27,7 @@ const createListing = async (req, res) => {
             location,
             contactEmail,
             contactPhone,
+            price,
             images,
             status: 'pending', // Explicitly setting it to pending
         });
@@ -68,7 +69,7 @@ const updateListing = async (req, res) => {
             return res.status(403).json({ message: 'Not authorized to edit this listing' });
         }
 
-        const { businessName, category, description, location, contactEmail, contactPhone } = req.body;
+        const { businessName, category, description, location, contactEmail, contactPhone, price } = req.body;
 
         if (businessName) listing.businessName = businessName;
         if (category) listing.category = category;
@@ -140,3 +141,4 @@ module.exports = {
     deleteListing,
     getMyEnquiries,
 };
+
