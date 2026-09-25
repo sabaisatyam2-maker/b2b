@@ -1,8 +1,13 @@
 import axios from "axios";
 
 // IMPORTANT: Frontend reads the backend URL from the .env file.
+let baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+if (!baseURL.endsWith("/api")) {
+  baseURL = baseURL.replace(/\/$/, "") + "/api";
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api",
+  baseURL,
 });
 
 // Every request automatically carries the JWT token (if the user is logged in)
